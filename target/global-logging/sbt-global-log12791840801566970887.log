@@ -1,0 +1,88 @@
+[debug] > Exec(early(addDefaultCommands), None, None)
+[debug] > Exec(addDefaultCommands, None, None)
+[debug] > Exec(early(initialize), None, None)
+[debug] > Exec(initialize, None, None)
+[debug] > Exec(boot, None, None)
+[debug] > Exec(writeSbtVersion, None, None)
+[debug] > Exec(reload, None, None)
+[debug] > Exec(sbtStashOnFailure, None, None)
+[debug] > Exec(onFailure loadFailed, None, None)
+[debug] > Exec(loadp, None, None)
+[info] welcome to sbt 1.10.6 (Oracle Corporation Java 23.0.1)
+[debug] Load.defaultLoad until apply took 27.419208ms
+[debug]           Load.loadUnit: plugins took 24.906333ms
+[debug]           Load.loadUnit: defsScala took 0.093375ms
+[debug] [Loading] Scanning directory /Users/boyplus/Desktop/learn/learn-scala/project
+[debug] [Loading] Found non-root projects 
+[debug] [Loading] Done in /Users/boyplus/Desktop/learn/learn-scala/project, returning: ()
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))
+[debug] Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)
+[debug] Plugins.deducer#function took 5.521166 ms
+[debug]               Load.resolveProject(learn-scala-build) took 15.204458ms
+[debug]             Load.loadTransitive: finalizeProject(Project(id learn-scala-build, base: /Users/boyplus/Desktop/learn/learn-scala/project, plugins: List(<none>))) took 29.720542ms
+[debug] [Loading] Done in /Users/boyplus/Desktop/learn/learn-scala/project, returning: (learn-scala-build)
+[debug]           Load.loadUnit: loadedProjectsRaw took 36.46825ms
+[debug]           Load.loadUnit: cleanEvalClasses took 0.06725ms
+[debug]         Load.loadUnit(file:/Users/boyplus/Desktop/learn/learn-scala/project/, ...) took 63.409459ms
+[debug]       Load.apply: load took 309.100875ms
+[debug]       Load.apply: resolveProjects took 2.88125ms
+[debug]       Load.apply: finalTransforms took 28.182291ms
+[debug]       Load.apply: config.delegates took 2.210792ms
+[debug]       Load.apply: Def.make(settings)... took 146.784416ms
+[debug]       Load.apply: structureIndex took 50.27575ms
+[debug]       Load.apply: mkStreams took 0.638ms
+[info] loading project definition from /Users/boyplus/Desktop/learn/learn-scala/project
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[debug]     Load.loadUnit: plugins took 2129.318833ms
+[debug]     Load.loadUnit: defsScala took 0.001667ms
+[debug] [Loading] Scanning directory /Users/boyplus/Desktop/learn/learn-scala
+[debug]       Load.loadUnit: mkEval took 2.371916ms
+[debug] [Loading] Found root project root w/ remaining 
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))
+[debug] Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)
+[debug] Plugins.deducer#function took 0.6505 ms
+[info] loading settings for project root from build.sbt...
+[debug]         Load.resolveProject(root) took 1.050458ms
+[debug]       Load.loadTransitive: finalizeProject(Project(id root, base: /Users/boyplus/Desktop/learn/learn-scala, plugins: List(<none>))) took 2.0395ms
+[debug] [Loading] Done in /Users/boyplus/Desktop/learn/learn-scala, returning: (root)
+[debug]     Load.loadUnit: loadedProjectsRaw took 969.983334ms
+[debug]     Load.loadUnit: cleanEvalClasses took 1.477834ms
+[debug]   Load.loadUnit(file:/Users/boyplus/Desktop/learn/learn-scala/, ...) took 3101.297667ms
+[debug] Load.apply: load took 3108.26275ms
+[debug] Load.apply: resolveProjects took 0.074459ms
+[debug] Load.apply: finalTransforms took 7.260583ms
+[debug] Load.apply: config.delegates took 0.204791ms
+[debug] Load.apply: Def.make(settings)... took 46.127625ms
+[debug] Load.apply: structureIndex took 13.269417ms
+[debug] Load.apply: mkStreams took 0.001792ms
+[info] set current project to learn-scala (in build file:/Users/boyplus/Desktop/learn/learn-scala/)
+[debug] > Exec(sbtPopOnFailure, None, None)
+[debug] > Exec(resumeFromFailure, None, None)
+[debug] > Exec(notifyUsersAboutShell, None, None)
+[debug] > Exec(iflast shell, None, None)
+[debug] > Exec(shell, None, None)
+[info] sbt server started at local:///Users/boyplus/.sbt/1.0/server/968605c8cd81498b49fe/sock
+[debug] Writing bsp connection file
+[info] started sbt server
