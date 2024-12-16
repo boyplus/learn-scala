@@ -1,6 +1,6 @@
 package lecture.part2oop
 
-object InheritanceAndTraits extends App {
+object Inheritance extends App {
   // Single class inheritance
   // private -> can access only on that class instance
   // protected -> can access only on the class itself/subclass but not from subclass instance
