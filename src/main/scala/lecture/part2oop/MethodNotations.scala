@@ -3,13 +3,22 @@ package lecture.part2oop
 import scala.language.postfixOps
 
 object MethodNotations extends App {
-  class Person(val name: String, favoriteMovie: String) {
+  class Person(val name: String, favoriteMovie: String, val age: Int = 0) {
     def likes(movie: String): Boolean = movie == favoriteMovie
     def +(person: Person): String = s"${this.name} is hanging out with ${person.name}"
     def unary_! : String = s"$name what the heck?"
     def isAlive: Boolean = true
     // () is important
     def apply(): String = s"Hi, my name is $name and I like $favoriteMovie"
+
+
+    def +(str: String): Person = new Person(s"$name ($str)", favoriteMovie)
+    def unary_+ : Person  = new Person(name, favoriteMovie, age + 1)
+    def learns(subject: String): String = s"$name learns $subject"
+    def learnsScala: String = this learns "Scala"
+
+
+    def apply(n: Int): String = s"$name watched $favoriteMovie $n times"
   }
 
 
@@ -17,6 +26,7 @@ object MethodNotations extends App {
   println(marry.likes("Inception"))
   println(marry likes "Inception") // equivalent
   // 1. Infix notation = operator notation (syntactic sugar)
+  // Syntax: object method parameter -> for methods with only one parameter
 
   // "operators" in Scala
   val tom = new Person("Tom", "Fight Club")
@@ -67,4 +77,9 @@ object MethodNotations extends App {
     4. Overload the apply method
       mary.apply(2) => Mary watched Inception 2 times
    */
+
+  println((marry + "the rock star").apply())
+  println((+marry).age)
+  println(marry learnsScala)
+  println(marry(10))
 }
