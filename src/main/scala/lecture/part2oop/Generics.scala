@@ -2,8 +2,15 @@ package lecture.part2oop
 
 object Generics extends App {
   // Generic class
-  class MyList[A] {
+  class MyList[+A] {
     // use type A
+    // B is a super type of A
+    def add[B >: A](element: B): MyList[B] = ???
+
+    /*
+      A = cat
+      B = Animal
+     */
   }
 
   class MyMap[Key, Value] {
@@ -31,7 +38,7 @@ object Generics extends App {
   class CovariantList[+A]
   val animal: Animal = new Cat
   val animalList: CovariantList[Animal] = new CovariantList[Cat]
-  // animalList.add(new Dog) ??? HARD QUESTION.
+  // animalList.add(new Dog) ??? HARD QUESTION => we return a list of Animal
 
   // 2. NO = INVARIANCE
   class InvariantList[A]
@@ -44,4 +51,13 @@ object Generics extends App {
   // 3. Hell, no!, CONTRAVARIANCE
   class Trainer[-A]
   val trainer: Trainer[Cat] = new Trainer[Animal]
+
+  // bounded types
+  // A is subtype of animal
+  class Cage[A <: Animal] (animal: A)
+  val cage = new Cage(new Dog)
+
+
+  class Car
+//  val newCage = new Cage(new Car)
 }
