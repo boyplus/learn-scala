@@ -149,5 +149,24 @@ object ListTest extends App {
   val doubler: ((Int) => Int) = new Function[Int, Int] {
     override def apply(element: Int): Int = element * 2
   }
+
+
+  // Anonymous function
+  val doublerAnonymous = (x: Int) => x * 2
+  val evenAnonymous = (x: Int) => x % 2 == 0
+  val flatMapAnonymous = (x: Int) => new Cons(x, new Cons(x+1, Empty))
+
+  println(listOfIntegers.map(doublerAnonymous))
+  println(listOfIntegers.filter(evenAnonymous))
+  println(listOfIntegers.flatMap(flatMapAnonymous))
+
+  // short version
+  println(listOfIntegers.map(x => x * 2))
+  println(listOfIntegers.filter(x => x%2 == 0))
+  println(listOfIntegers.flatMap(x => new Cons(x, new Cons(x+1, Empty))))
+
+  // shorter version
+  println(listOfIntegers.map(_ * 2))
+  println(listOfIntegers.filter(_%2 == 0))
 }
 
