@@ -41,6 +41,35 @@ object WhatsAFunction extends App {
     override def apply(a: String, b: String): String = a+b
   }
   println(concattor("boy", "plus"))
+
+
+  // exercise 3
+  // type of function
+  // Function1[Int, Function1[Int,Int]]
+  val superAdder: (Function1[Int, Function1[Int, Int]]) = new Function1[Int, Function1[Int, Int]] {
+    override def apply(x: Int): Int => Int = new Function1[Int, Int] {
+      // x is visible inside this function
+      override def apply(y: Int): Int = x + y
+    }
+  }
+
+  val adder3 = superAdder(3)
+  println(adder3(4))
+  println(superAdder(1)(2)) // curried function -> receive some kind of parameter and then return the function
+
+  /*
+    Takeaways -> we want to use function as a first class
+    We want to work with functions
+      - pass functions as parameters
+      - use functions as values
+    Problem: Scala works on top of the JVM
+      - designed for Java
+      - first-class elements: objects(instances of classes)
+    Solution: All Scala functions are objects
+      - function traits, up to 22 parameters
+      - syntactic sugar function types
+    Function2[Int, String, Int] === (Int, String) => Int
+   */
 }
 
 trait MyFunction[A, B] {
