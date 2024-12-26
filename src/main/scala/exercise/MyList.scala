@@ -142,5 +142,11 @@ object ListTest extends App {
 
   // as Cons is case class, no need to implement == method by ourselves
   println(listOfIntegers == clonedListOfIntegers)
+
+
+  // transform MyPredicate and MyTransformer into function types
+  val doubler: ((Int) => Int) = new Function[Int, Int] {
+    override def apply(element: Int): Int = element * 2
+  }
 }
 
