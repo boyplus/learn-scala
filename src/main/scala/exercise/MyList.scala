@@ -16,6 +16,7 @@ abstract class MyList[+A] {
   def printElements: String
   override def toString: String = "[" + printElements + "]"
 
+
   // higher-order functions -> either receive function as parameter or return function as result
   def map[B](transformer: A => B): MyList[B]
   def flatMap[B](transformer: A => MyList[B]): MyList[B]
@@ -23,6 +24,11 @@ abstract class MyList[+A] {
 
   // concatenation
   def ++[B >: A](list: MyList[B]): MyList[B]
+
+  // HOFs
+  def foreach(f: A => Unit): Unit
+  def sort(compare: (A, A) => Int): MyList[A]
+  def zipWith[B, C](l: MyList[B], zip: (A, B) => C): MyList[C]
 }
 
 // object can extend class
@@ -38,6 +44,14 @@ case object Empty extends MyList[Nothing] {
   def filter(predicate: Nothing => Boolean): MyList[Nothing] = Empty
 
   def ++[B >: Nothing](list: MyList[B]): MyList[B] = list
+
+  // HOFs
+  def foreach(f: Nothing => Unit): Unit = ()
+  def sort(compare: (Nothing, Nothing) => Int) = Empty
+  def zipWith[B, C](list: MyList[B], zip: (Nothing, B) => C): MyList[C] = {
+    if(!list.isEmpty) throw new RuntimeException("Lists fo not have the same length")
+    else Empty
+  }
 }
 
 case class Cons[+A](h: A, t: MyList[A]) extends MyList[A] {
@@ -97,6 +111,28 @@ case class Cons[+A](h: A, t: MyList[A]) extends MyList[A] {
    */
   def flatMap[B](transformer: A => MyList[B]): MyList[B] = {
     transformer(h) ++ t.flatMap(transformer)
+  }
+
+
+  // HOFs
+  def foreach(f: A => Unit): Unit = {
+    f(h)
+    t.foreach(f)
+  }
+
+  def sort(compare: (A, A) => Int): MyList[A] = {
+    def insert(x: A, sortedList: MyList[A]): MyList[A] = {
+      if(sortedList.isEmpty) Cons(x, Empty)
+      else if(compare(x, sortedList.head) <= 0) Cons(x, sortedList)
+      else Cons(sortedList.head, insert(x, sortedList.tail))
+    }
+    val sortedTail = t.sort(compare)
+    insert(h, sortedTail)
+  }
+
+  def zipWith[B, C](list: MyList[B], zip: (A, B) => C): MyList[C] = {
+    if(list.isEmpty) throw new RuntimeException("Lists fo not have the same length")
+    else Cons(zip(h, list.head), t.zipWith(list.tail, zip))
   }
 }
 
@@ -168,5 +204,17 @@ object ListTest extends App {
   // shorter version
   println(listOfIntegers.map(_ * 2))
   println(listOfIntegers.filter(_%2 == 0))
+
+
+  // foreach
+  listOfIntegers.foreach(x => println(x))
+  listOfIntegers.foreach(println)
+
+  // sort
+  println(listOfIntegers.sort((x,y) => y - x))
+
+
+  // zipWith
+  println(anotherListOfIntegers.zipWith(listOfStrings, _ + " " + _))
 }
 
