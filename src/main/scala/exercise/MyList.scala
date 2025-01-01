@@ -29,6 +29,7 @@ abstract class MyList[+A] {
   def foreach(f: A => Unit): Unit
   def sort(compare: (A, A) => Int): MyList[A]
   def zipWith[B, C](l: MyList[B], zip: (A, B) => C): MyList[C]
+  def fold[B](start: B)(operator: (B, A) => B): B
 }
 
 // object can extend class
@@ -52,6 +53,7 @@ case object Empty extends MyList[Nothing] {
     if(!list.isEmpty) throw new RuntimeException("Lists fo not have the same length")
     else Empty
   }
+  def fold[B](start: B)(operator: (B, Nothing) => B): B = start
 }
 
 case class Cons[+A](h: A, t: MyList[A]) extends MyList[A] {
@@ -134,6 +136,20 @@ case class Cons[+A](h: A, t: MyList[A]) extends MyList[A] {
     if(list.isEmpty) throw new RuntimeException("Lists fo not have the same length")
     else Cons(zip(h, list.head), t.zipWith(list.tail, zip))
   }
+
+  /*
+    [1,2,3].fold(0)(+) =
+    = [2,3].fold(0+1)(+)
+    = [3].fold(0+1+2)(+)
+    = [].fold(0+1+2+3)(+)
+    = 0+1+2+3
+    = 6
+   */
+
+  def fold[B](start: B)(operator: (B, A) => B): B = {
+    val newStart = operator(start, h)
+    t.fold(newStart)(operator)
+  }
 }
 
 //trait MyPredicate[-T] { // T => Boolean
@@ -215,6 +231,9 @@ object ListTest extends App {
 
 
   // zipWith
-  println(anotherListOfIntegers.zipWith(listOfStrings, _ + " " + _))
+  println(anotherListOfIntegers.zipWith[String, String](listOfStrings, _ + "-" + _))
+
+  // fold
+  println(listOfIntegers.fold(0)(_ + _))
 }
 
