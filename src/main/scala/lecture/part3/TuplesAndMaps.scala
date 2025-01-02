@@ -12,7 +12,7 @@ object TuplesAndMaps extends App {
   val aMap: Map[String, Int] = Map() //  call apply method
 
   // each element is tuple
-  val phonebook = Map(("Jim", 555), "Daniel" -> 789).withDefaultValue(-1)
+  val phonebook = Map(("Jim", 555), "Daniel" -> 789, "JIM" -> 9000).withDefaultValue(-1)
   // a-> b is sugar for (a, b)
 
   // map ops
@@ -28,6 +28,7 @@ object TuplesAndMaps extends App {
   // functions on maps
   // map, flatMap, filter
 
+  // .map -> Transform Map to another Map
   println(phonebook.map(pair => pair._1.toLowerCase -> pair._2))
 
   // filter keys
@@ -45,5 +46,19 @@ object TuplesAndMaps extends App {
   val names = List("Bob", "James", "Angela", "Mary", "Daniel", "Jim")
   println(names.groupBy(name => name.charAt(0)))
 
-  // Takeaways
+  /*
+    1. What would happen if I had two original entries "Jim" -> 555 and "JIM" -> 900
+
+    2. Overly simplified social network based on maps
+    Person = String
+    - add a person to the network
+    - remove
+    - friend (mutual)
+    - unfriend
+
+    - number of friends of a person
+    - person with most friends
+    - how many people have no friends
+    - if there is a social connection between two people (direct or not)
+   */
 }
