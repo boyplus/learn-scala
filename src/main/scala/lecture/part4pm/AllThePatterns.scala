@@ -70,6 +70,7 @@ object AllThePatterns extends App {
   // 8 - multi-patterns
   val multiPattern = aList match {
     case Empty | Cons(0, _) => "" // compound pattern (multi-pattern)
+    case _ => ""
   }
 
   // 9 - if guards
@@ -82,6 +83,14 @@ object AllThePatterns extends App {
   /*
     Question
    */
-  
+
   val numbers = List(1,2,3)
+  val numbersMatch = numbers match {
+    case listOfStrings: List[String] => "a list of strings"
+    case listOfNumbers: List[Int] => "a list of numbers"
+    case _ => ""
+  }
+  println(numbersMatch)
+  // JVM trick question
+  // Generic was introduced in java5, for backward compatibility, the generic types are deleted from type match
 }
