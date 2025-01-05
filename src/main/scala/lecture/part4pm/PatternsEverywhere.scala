@@ -38,6 +38,31 @@ object PatternsEverywhere extends App {
   } yield first * second
   println(filterTuples)
   // case classes, :: operators, ...
-  
+
   // big idea #3
+  val tuple = (1,2,3)
+  val (a,b,c) = tuple // extract value from tuple
+  println(s"$a $b $c")
+  // multiple value definitions based on pattern matching
+  // ALL THE POWER
+
+  val head :: tail = list
+  println(head)
+  println(tail)
+
+  // big idea #4 - NEW
+  // partial function based on pattern matching
+  val mappedList = list.map {
+    case v if v % 2 == 0 => v + " is even"
+    case 1 => "the one"
+    case _ => "something else"
+  } // partial function literal
+  println(mappedList)
+
+  val mappedList2 = list.map { x => x match {
+    case v if v % 2 == 0 => v + " is even"
+    case 1 => "the one"
+    case _ => "something else"
+    }
+  }
 }
