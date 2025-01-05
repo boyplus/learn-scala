@@ -48,14 +48,69 @@ object HandlingFailure extends App {
     Exercise
    */
 
-  val hostname = "localhost"
+  val host = "localhost"
   val port = "8080"
   def renderHTML(page: String) = println(page)
 
-  class Connection{
+  class Connection {
     def get(url: String): String = {
       val random = new Random(System.nanoTime())
-      ""
+      if(random.nextBoolean()) "<html>...</html>"
+      else throw new RuntimeException("Connection interrupted")
     }
+
+    def getSafe(url: String): Try[String] = Try(get(url))
   }
+
+  object HttpService {
+    val random = new Random(System.nanoTime())
+
+    def getConnection(host: String, port: String): Connection = {
+      if(random.nextBoolean()) new Connection
+      else throw new RuntimeException("Someone else took the port")
+    }
+
+    def getSafeConnection(host: String, port: String): Try[Connection] = Try(getConnection(host, port))
+  }
+
+  // if you can the html page from the connection, print it to the console i.e. call renderHTML
+  val possibleConnection = HttpService.getSafeConnection(host, port)
+  val possibleHTML = possibleConnection.flatMap(connection => connection.getSafe("/home"))
+  possibleHTML.foreach(renderHTML)
+
+  // shorthand version
+  HttpService
+    .getSafeConnection(host, port)
+    .flatMap(connection => connection.getSafe("/home"))
+    .foreach(renderHTML)
+
+  // for-comprehensions version
+  for {
+    connection <- HttpService.getSafeConnection(host, port)
+    html <- connection.getSafe("/home")
+  } renderHTML(html)
+
+  /*
+    try {
+      connection = HttpService.getConnection(host, port)
+      try {
+        page = connection.get("/home")
+        renderHTML(page)
+      } catch(some other exception)
+    } catch(exception) {
+
+    }
+   */
+
+  /*
+    Takeaways
+    1. Use try to handle exceptions gracefully:
+        - Avoid runtime crashes due to uncaught exceptions
+        - Avoid an endless amount of try-catches
+    2. A functional way of dealing with failure
+        - map, flatMap, filter
+        - orElse
+
+    If you design a method to return a (some type) but may throw an exception, return a Try[that type] instead
+   */
 }
