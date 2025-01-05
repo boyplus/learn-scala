@@ -63,7 +63,7 @@ object PatternMatching extends App {
     takes an Expr => human readable form
 
     Sum(Number(2), Number(3)) => 2 + 3
-    Sum(Number(2), Number(3), Number(4)) => 2 + 3 + 4
+    Sum(Sum(Number(2), Number(3)), Number(4)) => 2 + 3 + 4
     Product(Sum(Number(2), Number(1)), Number(3)) => (2+1) * 3
     Sum(Product(Number(2), Number(1)), Number(3)) = 2 * 1 + 3
    */
@@ -71,4 +71,22 @@ object PatternMatching extends App {
   case class Number(n: Int) extends Expr
   case class Sum(e1: Expr, e2: Expr) extends Expr
   case class Product(e1: Expr, e2: Expr) extends Expr
+
+  def show(e: Expr): String = e match {
+    case Number(n) => s"$n"
+    case Sum(e1,e2) => show(e1) + " + " + show(e2)
+    case Product(e1, e2) => {
+      def maybeShowParentheses(expr: Expr) = expr match {
+        case Product(_, _) => show(expr)
+        case Number(_) => show(expr)
+        case _ => "(" + show(expr) + ")"
+      }
+      maybeShowParentheses(e1) + " * " + maybeShowParentheses(e2)
+    }
+  }
+
+  println(show(Sum(Number(2), Number(3))))
+  println(show(Sum(Sum(Number(2), Number(3)), Number(4))))
+  println(show(Product(Sum(Number(2), Number(1)), Sum(Number(3), Number(8)))))
+  println(show(Sum(Product(Number(2), Number(1)), Number(3))))
 }
